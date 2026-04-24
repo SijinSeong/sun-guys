@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>자기소개 페이지</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Nanum+Myeongjo:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-1: #fff7e8;
+      --bg-2: #ffe4b5;
+      --ink: #1f2937;
+      --muted: #4b5563;
+      --card: rgba(255, 255, 255, 0.78);
+      --line: rgba(255, 255, 255, 0.6);
+      --point: #d14d2f;
+      --point-soft: #f6b17a;
+      --shadow: 0 20px 45px rgba(209, 77, 47, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Noto Sans KR", sans-serif;
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(255, 255, 255, 0.7), transparent 34%),
+        radial-gradient(circle at 92% 88%, rgba(209, 77, 47, 0.22), transparent 30%),
+        linear-gradient(120deg, var(--bg-1), var(--bg-2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      overflow-x: hidden;
+    }
+
+    .decor {
+      position: fixed;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      filter: blur(2px);
+      z-index: -1;
+      animation: drift 8s ease-in-out infinite;
+    }
+
+    .decor.one {
+      top: -65px;
+      right: -40px;
+      background: linear-gradient(145deg, #ff7f50, #ffd07d);
+    }
+
+    .decor.two {
+      bottom: -80px;
+      left: -40px;
+      width: 260px;
+      height: 260px;
+      background: linear-gradient(145deg, #ffb980, #ffdebe);
+      animation-delay: 1.2s;
+    }
+
+    .profile-card {
+      width: min(860px, 100%);
+      backdrop-filter: blur(8px);
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 290px 1fr;
+      overflow: hidden;
+      animation: rise 0.8s ease-out;
+    }
+
+    .left {
+      background:
+        linear-gradient(180deg, rgba(209, 77, 47, 0.93), rgba(209, 77, 47, 0.72)),
+        url("https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80") center/cover;
+      color: #fff;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 0.75rem;
+      min-height: 470px;
+    }
+
+    .name {
+      font-family: "Nanum Myeongjo", serif;
+      font-size: 2rem;
+      line-height: 1.2;
+      letter-spacing: 0.02em;
+    }
+
+    .role {
+      font-size: 1rem;
+      opacity: 0.95;
+    }
+
+    .tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.25rem;
+    }
+
+    .tag {
+      font-size: 0.82rem;
+      padding: 0.35rem 0.65rem;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    .right {
+      padding: 2rem;
+      display: grid;
+      gap: 1.3rem;
+      align-content: center;
+    }
+
+    h2 {
+      font-family: "Nanum Myeongjo", serif;
+      font-size: 1.35rem;
+      color: var(--point);
+      margin-bottom: 0.2rem;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 0.98rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .item {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(209, 77, 47, 0.2);
+      border-radius: 14px;
+      padding: 0.9rem 1rem;
+      transform: translateY(8px);
+      opacity: 0;
+      animation: appear 0.55s ease forwards;
+    }
+
+    .item:nth-child(2) { animation-delay: 0.1s; }
+    .item:nth-child(3) { animation-delay: 0.2s; }
+    .item:nth-child(4) { animation-delay: 0.3s; }
+
+    .item strong {
+      display: block;
+      color: var(--ink);
+      margin-bottom: 0.35rem;
+      font-size: 0.93rem;
+    }
+
+    .highlight {
+      color: var(--point);
+      font-weight: 700;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes appear {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes drift {
+      0%,
+      100% { transform: translateY(0); }
+      50% { transform: translateY(12px); }
+    }
+
+    @media (max-width: 780px) {
+      .profile-card {
+        grid-template-columns: 1fr;
+      }
+
+      .left {
+        min-height: 300px;
+      }
+
+      .right {
+        padding: 1.4rem;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="decor one"></div>
+  <div class="decor two"></div>
+
+  <main class="profile-card" aria-label="자기소개 카드">
+    <section class="left">
+      <h1 class="name">윤희욱</h1>
+      <p class="role">배움을 즐기는 프론트엔드 개발자</p>
+      <div class="tags" aria-label="관심 키워드">
+        <span class="tag">UI/UX</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">문제 해결</span>
+      </div>
+    </section>
+
+    <section class="right">
+      <div>
+        <h2>About Me</h2>
+        <p>
+          사용자가 <span class="highlight">쉽고 편하게</span> 사용할 수 있는 화면을 만드는 것을 좋아합니다.
+          작은 불편도 놓치지 않고 개선하면서, 코드와 경험 모두를 더 나아지게 만드는 개발을 지향합니다.
+        </p>
+      </div>
+
+      <div class="grid">
+        <article class="item">
+          <strong>기술 스택</strong>
+          HTML, CSS, JavaScript, React
+        </article>
+        <article class="item">
+          <strong>강점</strong>
+          빠른 학습, 책임감 있는 실행, 협업 커뮤니케이션
+        </article>
+        <article class="item">
+          <strong>취미</strong>
+          사진 산책, 러닝, 기술 블로그 기록
+        </article>
+        <article class="item">
+          <strong>연락처</strong>
+          hw010603@gmail.com
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
