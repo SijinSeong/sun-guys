@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>박지우 — About Me</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700&family=DM+Serif+Display:ital@0;1&family=Space+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f5f0e8;
+        --ink: #1a1410;
+        --accent: #c94a2c;
+        --muted: #8a7d6e;
+        --paper: #faf7f2;
+        --line: #d4c9b8;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: var(--bg);
+        color: var(--ink);
+        font-family: 'Noto Serif KR', serif;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* grain overlay */
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+        background-size: 200px 200px;
+        pointer-events: none;
+        z-index: 999;
+        opacity: 0.6;
+      }
+
+      /* ── HEADER ── */
+      header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: end;
+        padding: 3rem 4rem 2rem;
+        border-bottom: 1px solid var(--line);
+        animation: fadeDown 0.8s ease both;
+      }
+
+      .header-label {
+        font-family: 'Space Mono', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.5rem;
+      }
+
+      .name-block h1 {
+        font-family: 'DM Serif Display', serif;
+        font-size: clamp(3rem, 8vw, 6.5rem);
+        line-height: 0.95;
+        letter-spacing: -0.02em;
+        color: var(--ink);
+      }
+
+      .name-block h1 em {
+        font-style: italic;
+        color: var(--accent);
+      }
+
+      .header-meta {
+        text-align: right;
+        font-family: 'Space Mono', monospace;
+        font-size: 0.7rem;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      /* ── HERO STRIP ── */
+      .hero-strip {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        overflow: hidden;
+        animation: fadeUp 0.8s 0.2s ease both;
+      }
+
+      .hero-image {
+        width: 360px;
+        height: 420px;
+        flex-shrink: 0;
+        background: linear-gradient(
+          135deg,
+          #c9a882 0%,
+          #8a6e55 60%,
+          #4a3728 100%
+        );
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-image::after {
+        content: '지우';
+        position: absolute;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        font-family: 'DM Serif Display', serif;
+        font-size: 5rem;
+        font-style: italic;
+        color: rgba(255, 255, 255, 0.15);
+        line-height: 1;
+      }
+
+      .hero-image .avatar-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .avatar-placeholder svg {
+        width: 140px;
+        opacity: 0.25;
+      }
+
+      .hero-text {
+        flex: 1;
+        padding: 3rem 4rem;
+      }
+
+      .hero-text .quote {
+        font-family: 'DM Serif Display', serif;
+        font-size: clamp(1.4rem, 3vw, 2.2rem);
+        font-style: italic;
+        line-height: 1.4;
+        color: var(--ink);
+        margin-bottom: 2rem;
+        position: relative;
+        padding-left: 1.5rem;
+      }
+
+      .hero-text .quote::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0.2em;
+        width: 3px;
+        height: 80%;
+        background: var(--accent);
+      }
+
+      .hero-text p {
+        font-size: 0.95rem;
+        line-height: 1.9;
+        color: var(--muted);
+        max-width: 480px;
+      }
+
+      /* ── DIVIDER ── */
+      .section-divider {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0 4rem;
+        margin: 2.5rem 0 1rem;
+      }
+
+      .section-divider span {
+        font-family: 'Space Mono', monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+
+      .section-divider::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: var(--line);
+      }
+
+      /* ── INFO GRID ── */
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0;
+        padding: 0 4rem;
+        border-top: 1px solid var(--line);
+        animation: fadeUp 0.8s 0.4s ease both;
+      }
+
+      .info-card {
+        padding: 2rem 0;
+        border-right: 1px solid var(--line);
+        padding-right: 2.5rem;
+        margin-right: 2.5rem;
+      }
+
+      .info-card:last-child {
+        border-right: none;
+        margin-right: 0;
+        padding-right: 0;
+      }
+
+      .info-card .ic-label {
+        font-family: 'Space Mono', monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.6rem;
+      }
+
+      .info-card .ic-value {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.8rem;
+        color: var(--ink);
+        line-height: 1.1;
+      }
+
+      .info-card .ic-sub {
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin-top: 0.3rem;
+        font-family: 'Space Mono', monospace;
+      }
+
+      /* ── ABOUT SECTION ── */
+      .about-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        padding: 3rem 4rem;
+        border-top: 1px solid var(--line);
+        animation: fadeUp 0.8s 0.5s ease both;
+      }
+
+      .about-section h2 {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.8rem;
+        color: var(--ink);
+        margin-bottom: 1rem;
+      }
+
+      .about-section h2 em {
+        font-style: italic;
+        color: var(--accent);
+      }
+
+      .about-section p {
+        font-size: 0.9rem;
+        line-height: 1.95;
+        color: var(--muted);
+      }
+
+      /* ── SKILLS ── */
+      .skills-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1.2rem;
+      }
+
+      .skill-tag {
+        font-family: 'Space Mono', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+        padding: 0.35rem 0.75rem;
+        border: 1px solid var(--line);
+        color: var(--muted);
+        background: var(--paper);
+        text-transform: uppercase;
+        transition: all 0.2s;
+        cursor: default;
+      }
+
+      .skill-tag:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        background: transparent;
+      }
+
+      /* ── INTERESTS ── */
+      .interests-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        padding: 0 4rem;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        animation: fadeUp 0.8s 0.6s ease both;
+      }
+
+      .interest-item {
+        padding: 2rem 0;
+        border-right: 1px solid var(--line);
+        padding-right: 2rem;
+        margin-right: 2rem;
+      }
+
+      .interest-item:last-child {
+        border-right: none;
+        margin-right: 0;
+        padding-right: 0;
+      }
+
+      .interest-item .ii-emoji {
+        font-size: 1.6rem;
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      .interest-item .ii-name {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.1rem;
+        color: var(--ink);
+        margin-bottom: 0.2rem;
+      }
+
+      .interest-item .ii-desc {
+        font-family: 'Space Mono', monospace;
+        font-size: 0.6rem;
+        color: var(--muted);
+        letter-spacing: 0.05em;
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 2rem 4rem;
+        animation: fadeUp 0.8s 0.7s ease both;
+      }
+
+      footer .f-name {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1rem;
+        font-style: italic;
+        color: var(--muted);
+      }
+
+      footer .f-copy {
+        font-family: 'Space Mono', monospace;
+        font-size: 0.6rem;
+        color: var(--line);
+        letter-spacing: 0.15em;
+      }
+
+      /* ── ANIMATIONS ── */
+      @keyframes fadeDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 768px) {
+        header {
+          grid-template-columns: 1fr;
+          padding: 2rem;
+        }
+        .header-meta {
+          text-align: left;
+          margin-top: 1rem;
+        }
+        .hero-strip {
+          flex-direction: column;
+        }
+        .hero-image {
+          width: 100%;
+          height: 260px;
+        }
+        .hero-text {
+          padding: 2rem;
+        }
+        .info-grid,
+        .interests-row {
+          grid-template-columns: 1fr 1fr;
+          padding: 0 2rem;
+        }
+        .about-section {
+          grid-template-columns: 1fr;
+          padding: 2rem;
+          gap: 2rem;
+        }
+        .section-divider {
+          padding: 0 2rem;
+        }
+        footer {
+          padding: 1.5rem 2rem;
+          flex-direction: column;
+          gap: 0.5rem;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header>
+      <div class="name-block">
+        <p class="header-label">Personal Profile — 자기소개</p>
+        <h1>박<em>지우</em></h1>
+      </div>
+      <div class="header-meta">
+        <p>Born. 2001</p>
+        <p>Age. 26</p>
+        <p>Korea</p>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <div class="hero-strip">
+      <div class="hero-image">
+        <div class="avatar-placeholder">
+          <svg
+            viewBox="0 0 100 130"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="50" cy="40" r="28" fill="white" />
+            <path d="M10 130 Q10 85 50 85 Q90 85 90 130" fill="white" />
+          </svg>
+        </div>
+      </div>
+      <div class="hero-text">
+        <p class="quote">매일 조금씩 성장하는 것,<br />그게 나의 목표입니다.</p>
+        <p>
+          안녕하세요, 박지우입니다. 2001년생으로 올해 스물여섯 살이 되었습니다.
+          새로운 것에 도전하는 것을 두려워하지 않으며, 언제나 배움의 자세로
+          살아가려 노력합니다. 작은 것에서도 의미를 찾고, 사람들과 함께하는
+          시간을 소중히 여깁니다.
+        </p>
+      </div>
+    </div>
+
+    <!-- INFO GRID -->
+    <div class="section-divider"><span>기본 정보</span></div>
+    <div class="info-grid">
+      <div class="info-card">
+        <p class="ic-label">Name</p>
+        <p class="ic-value">박지우</p>
+        <p class="ic-sub">Park Ji-woo</p>
+      </div>
+      <div class="info-card">
+        <p class="ic-label">Age</p>
+        <p class="ic-value">26세</p>
+        <p class="ic-sub">2001년생</p>
+      </div>
+      <div class="info-card">
+        <p class="ic-label">Location</p>
+        <p class="ic-value">대한민국</p>
+        <p class="ic-sub">Republic of Korea</p>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="about-section">
+      <div>
+        <h2>나는 <em>어떤 사람</em>인가</h2>
+        <p>
+          평범한 하루하루를 특별하게 만들기 위해 노력하는 사람입니다. 즉흥적인
+          것을 좋아하지만 중요한 순간엔 꼼꼼함을 잃지 않으려 합니다. 혼자 있는
+          시간도, 사람들 사이에 있는 시간도 모두 나에게 소중합니다. 실패를
+          두려워하기보다 경험으로 받아들이는 편이고, 그 과정에서 무언가를
+          배웠다면 충분히 의미 있다고 생각합니다.
+        </p>
+      </div>
+      <div>
+        <h2>관심사 & <em>능력</em></h2>
+        <p>
+          다양한 분야에 관심이 많아 폭넓게 공부하는 것을 즐깁니다. 최근에는
+          기술과 창작의 교차점에 흥미를 느끼고 있습니다.
+        </p>
+        <div class="skills-list">
+          <span class="skill-tag">소통</span>
+          <span class="skill-tag">창의적 사고</span>
+          <span class="skill-tag">문제 해결</span>
+          <span class="skill-tag">팀워크</span>
+          <span class="skill-tag">빠른 학습</span>
+          <span class="skill-tag">기획</span>
+          <span class="skill-tag">성실함</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTERESTS -->
+    <div class="section-divider"><span>관심사</span></div>
+    <div class="interests-row">
+      <div class="interest-item">
+        <span class="ii-emoji">🎵</span>
+        <p class="ii-name">음악</p>
+        <p class="ii-desc">듣고 / 느끼고</p>
+      </div>
+      <div class="interest-item">
+        <span class="ii-emoji">📚</span>
+        <p class="ii-name">독서</p>
+        <p class="ii-desc">생각을 넓히는 시간</p>
+      </div>
+      <div class="interest-item">
+        <span class="ii-emoji">🚶</span>
+        <p class="ii-name">산책</p>
+        <p class="ii-desc">머리를 비우는 루틴</p>
+      </div>
+      <div class="interest-item">
+        <span class="ii-emoji">🍜</span>
+        <p class="ii-name">맛집 탐방</p>
+        <p class="ii-desc">먹는 게 낙이죠</p>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <span class="f-name">박지우 — 2001</span>
+      <span class="f-copy">PERSONAL PROFILE · 2026</span>
+    </footer>
+  </body>
+</html>
